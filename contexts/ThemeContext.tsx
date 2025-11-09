@@ -20,8 +20,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     setIsDark(!isDark);
   };
 
-  const styles = createThemedStyles();
-  //const styles = createThemedStyles(isDark);
+  const styles = createThemedStyles(isDark);
 
   return (
     <ThemeContext.Provider value={{ isDark, toggleTheme, styles }}>

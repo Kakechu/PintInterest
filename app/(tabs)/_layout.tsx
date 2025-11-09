@@ -9,6 +9,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Ionicons
               name={focused ? "home-sharp" : "home-outline"}
@@ -21,12 +22,14 @@ export default function TabLayout() {
         name="beer-list"
         options={{
           title: "My Beers",
+          headerShown: false,
         }}
       />
       <Tabs.Screen
         name="add-beer"
         options={{
           title: "Add",
+          headerShown: false,
         }}
       />
     </Tabs>

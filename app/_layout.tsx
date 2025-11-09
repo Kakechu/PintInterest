@@ -1,8 +1,9 @@
 import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { Stack } from "expo-router";
 
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { StatusBar } from "expo-status-bar";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
 const ThemedLayout = () => {
   // use theme hook here
@@ -16,7 +17,12 @@ const ThemedLayout = () => {
         screenOptions={{
           headerShown: true,
           headerTitle: () => <Text>PintInterest </Text>,
-          headerRight: () => <Text>Signup</Text>,
+          headerRight: () => (
+            <View>
+              <ThemeToggle />
+              <Text>Signup/Login</Text>
+            </View>
+          ),
         }}
       />
     </>
