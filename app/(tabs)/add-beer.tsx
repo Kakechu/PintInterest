@@ -1,6 +1,8 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { Text, View } from "react-native";
 
+import Button from '@/components/ui/button';
+
 export default function AddBeer() {
   const { styles } = useTheme();
   return (
@@ -11,6 +13,7 @@ export default function AddBeer() {
       <Text>Description: [input]</Text>
       <Text>This is where you put a photo.</Text>
       <Text>Mark as favorite.</Text>
+      <Button label="Choose a photo" />
     </View>
   );
 }
