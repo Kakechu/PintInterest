@@ -1,20 +1,27 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+
 
 type Props = {
   label: string;
 };
 
 export default function Button({ label }: Props) {
+
+  const { styles } = useTheme();
+  
   return (
-    <View style={styles.buttonContainer}>
-      <Pressable style={styles.button} onPress={() => alert('not implemented')}>
-        <Text style={styles.buttonLabel}>{label}</Text>
+    <View style={[styles.buttonContainer]}>
+      <Pressable
+        style={[styles.button]}
+        onPress={() => alert('You pressed a button.')}>
+        <Text style={[styles.buttonLabel]}>{label}</Text>
       </Pressable>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const styleSheet = StyleSheet.create({
   buttonContainer: {
     width: 320,
     height: 68,
