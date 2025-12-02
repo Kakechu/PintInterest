@@ -1,0 +1,25 @@
+import { useTheme } from "@/contexts/ThemeContext";
+import { Pressable, Text } from "react-native";
+
+type Props = {
+  label: string;
+  onPress?: () => void;
+  variant?: "small" | "large";
+};
+
+export default function CustomButton({ label, onPress, variant }: Props) {
+  const { styles } = useTheme();
+
+  return (
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [
+        styles.button,
+        variant === "small" ? styles.buttonSmall : styles.buttonLarge,
+        pressed && styles.buttonPressed,
+      ]}
+    >
+      <Text style={[styles.buttonLabel]}>{label}</Text>
+    </Pressable>
+  );
+}
