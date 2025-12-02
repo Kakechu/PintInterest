@@ -4,15 +4,23 @@ import { useState } from "react";
 import { View } from "react-native";
 
 import BeerRating from "@/components/ui/beer-rating";
+import CustomCheckbox from "@/components/ui/custom-checkbox";
 import CustomInput from "@/components/ui/custom-input";
 import CustomText from "@/components/ui/custom-text";
 import CustomButton from "@/components/ui/custom_button";
+import ImageViewer from "@/components/ui/image-viewer";
+
+const PlaceholderImage = require("@/assets/images/placeholder.png");
 
 export default function AddBeer() {
   const { styles } = useTheme();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(
+    undefined
+  );
+  const [favorite, setFavorite] = useState(false);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -32,6 +40,7 @@ export default function AddBeer() {
     <View style={styles.container}>
       <View style={styles.formContainer}>
         <CustomText variant={"screenTitle"}>Add a beer.</CustomText>
+
         <CustomInput
           label="Name"
           secure={false}
@@ -46,14 +55,17 @@ export default function AddBeer() {
           onUpdateValue={(value) => setDescription(value)}
           long={true}
         />
-        <CustomText variant="body">This is where you put a photo.</CustomText>
+        <ImageViewer
+          imgSource={PlaceholderImage}
+          selectedImage={selectedImage}
+        />
 
         <CustomButton
           label="Choose a photo"
           onPress={pickImageAsync}
           variant="large"
         />
-        <CustomText variant="body">Mark as favorite</CustomText>
+        <CustomCheckbox checked={favorite} onValueChange={setFavorite} />
       </View>
     </View>
   );

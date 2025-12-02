@@ -1,7 +1,7 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { Text, View } from "react-native";
 
-type TextVariant = "screenTitle" | "label" | "body" | "pressable";
+type TextVariant = "screenTitle" | "label" | "body" | "pressable" | "link";
 
 type Props = {
   children?: React.ReactNode;
@@ -19,6 +19,7 @@ const CustomText = ({ children, variant }: Props) => {
           variant === "label" && styles.textLabel,
           variant === "body" && styles.textBody,
           variant === "pressable" && styles.textPressable,
+          variant === "link" && styles.textLink,
         ]}
       >
         {children}

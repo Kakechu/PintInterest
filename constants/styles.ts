@@ -39,6 +39,16 @@ export const createThemedStyles = (isDark: boolean = true) => {
     buttonPressed: {
       opacity: 0.72,
     },
+    checkBox: {
+      color: theme.lightForeground,
+      marginRight: 4,
+    },
+    checkBoxContainer: {
+      flexDirection: "row",
+      marginVertical: 12,
+      paddingRight: 4,
+      //alignItems: "center",
+    },
     container: {
       ...basicFlex,
       flex: 1,
@@ -52,6 +62,12 @@ export const createThemedStyles = (isDark: boolean = true) => {
       marginTop: 64,
       marginHorizontal: 32,
       padding: 16,
+    },
+    image: {
+      width: 150,
+      height: 150,
+      borderRadius: 18,
+      marginVertical: 12,
     },
     inputBase: {
       backgroundColor: theme.lightBackground,
@@ -80,11 +96,12 @@ export const createThemedStyles = (isDark: boolean = true) => {
     },
     textBase: {
       color: theme.lightForeground,
+      fontSize: 16,
     },
     textScreenTitle: {
       fontSize: 22,
       fontWeight: "bold",
-      marginBottom: 12,
+      marginVertical: 12,
     },
     textLabel: { fontSize: 16, marginBottom: 4 },
     textBody: { fontSize: 16 },
@@ -93,6 +110,9 @@ export const createThemedStyles = (isDark: boolean = true) => {
       opacity: 0.85,
       textDecorationLine: "underline",
       paddingVertical: 4,
+    },
+    textLink: {
+      textDecorationLine: "underline",
     },
     title: {
       color: theme.lightForeground,
