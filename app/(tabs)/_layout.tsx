@@ -19,17 +19,29 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="beer-list"
-        options={{
-          title: "My Beers",
-          headerShown: false,
-        }}
-      />
-      <Tabs.Screen
         name="add-beer"
         options={{
           title: "Add",
           headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={focused ? "beer" : "beer-outline"}
+              size={focused ? 28 : 22}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="beer-list"
+        options={{
+          title: "My Beers",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={focused ? "list" : "list-outline"}
+              size={focused ? 28 : 22}
+            />
+          ),
         }}
       />
     </Tabs>
