@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { Colors } from "./theme";
 
 export const createThemedStyles = (isDark: boolean = true) => {
@@ -12,6 +12,17 @@ export const createThemedStyles = (isDark: boolean = true) => {
   return StyleSheet.create({
     beerIconColor: {
       color: theme.lightForeground,
+    },
+    beerItem: {
+      margin: 16,
+      backgroundColor: theme.lightBackground,
+      borderRadius: 8,
+      elevation: 4,
+      shadowColor: theme.mediumBackground,
+      shadowOpacity: 0.25,
+      shadowOffset: { width: 0, height: 2 },
+      shadowRadius: 8,
+      overflow: Platform.OS === "android" ? "hidden" : "visible",
     },
     button: {
       borderRadius: 10,
@@ -61,6 +72,14 @@ export const createThemedStyles = (isDark: boolean = true) => {
       backgroundColor: theme.darkBackground,
       marginTop: 64,
       marginHorizontal: 32,
+      padding: 16,
+    },
+    beerContainer: {
+      borderRadius: 8,
+      overflow: "hidden",
+    },
+    listContainer: {
+      flex: 1,
       padding: 16,
     },
     image: {

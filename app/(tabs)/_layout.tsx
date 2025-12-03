@@ -32,7 +32,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="beer-list"
+        name="my-beers"
         options={{
           title: "My Beers",
           headerShown: false,
