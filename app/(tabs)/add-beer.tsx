@@ -9,14 +9,19 @@ import CustomInput from "@/components/ui/custom-input";
 import CustomText from "@/components/ui/custom-text";
 import CustomButton from "@/components/ui/custom_button";
 import ImageViewer from "@/components/ui/image-viewer";
+import { NewBeer } from "@/types/beer";
+
+import { useBeers } from "@/contexts/BeerContext";
 
 const PlaceholderImage = require("@/assets/images/placeholder.png");
 
 export default function AddBeer() {
   const { styles } = useTheme();
+  const { addBeer } = useBeers();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [rating, setRating] = useState(0);
   const [selectedImage, setSelectedImage] = useState<string | undefined>(
     undefined
   );
@@ -36,6 +41,22 @@ export default function AddBeer() {
     }
   };
 
+  const onSubmitHandler = async () => {
+    try {
+      const beerData: NewBeer = {
+        name,
+        rating,
+        description,
+        photo: selectedImage,
+        favorite,
+      };
+      console.log(beerData);
+      await addBeer(beerData);
+    } catch (error) {
+      console.log("oopsie", error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
@@ -47,7 +68,7 @@ export default function AddBeer() {
           value={name}
           onUpdateValue={(value) => setName(value)}
         />
-        <BeerRating onChange={() => {}} />
+        <BeerRating value={rating} onChange={(value) => setRating(value)} />
         <CustomInput
           label="Description"
           secure={false}
@@ -66,7 +87,7 @@ export default function AddBeer() {
           variant="large"
         />
         <CustomCheckbox checked={favorite} onValueChange={setFavorite} />
-        <CustomButton label="Save" />
+        <CustomButton label="Save" onPress={onSubmitHandler} />
       </View>
     </View>
   );

@@ -1,50 +1,51 @@
 import { useTheme } from "@/contexts/ThemeContext";
-import React, { useState } from "react";
+import React from "react";
 import { Pressable, View } from "react-native";
 import BeerIcon from "./beer-icon";
 import CustomText from "./custom-text";
 
 type RatingProps = {
-  value?: number;
-  onChange: (rating: number) => void;
+  value: number;
+  onChange?: (rating: number) => void;
+  readOnly?: boolean;
 };
 
 const BeerRating: React.FC<RatingProps> = ({
   value = 0,
   onChange,
+  readOnly = false,
 }: RatingProps) => {
   const { styles } = useTheme();
-  const [rating, setRating] = useState(0);
-
   const totalBeers = 5;
 
   const handlePress = (index: number) => {
-    setRating(index + 1);
-    onChange(index + 1);
+    if (readOnly) return;
+    onChange?.(index + 1);
     console.log(index);
   };
 
   const handleClear = () => {
-    setRating(0);
-    onChange(0);
-    console.log("clearing");
+    if (readOnly) return;
+    onChange?.(0);
   };
 
   return (
     <View>
-      <CustomText variant={"label"}>Rating (1-5):</CustomText>
+      {!readOnly && <CustomText variant={"label"}>Rating (1-5):</CustomText>}
       <View style={styles.ratingContainer}>
         {Array.from({ length: totalBeers }, (_, index) => (
           <BeerIcon
             key={index}
-            selected={index < rating}
+            selected={index < value}
             onPress={() => handlePress(index)}
           />
         ))}
       </View>
-      <Pressable onPress={handleClear}>
-        <CustomText variant="pressable">Reset</CustomText>
-      </Pressable>
+      {!readOnly && (
+        <Pressable onPress={handleClear}>
+          <CustomText variant="pressable">Reset</CustomText>
+        </Pressable>
+      )}
     </View>
   );
 };

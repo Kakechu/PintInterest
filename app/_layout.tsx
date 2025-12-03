@@ -2,6 +2,7 @@ import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { Stack } from "expo-router";
 
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { BeerProvider } from "@/contexts/BeerContext";
 import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 
@@ -32,8 +33,10 @@ const ThemedLayout = () => {
 export default function RootLayout() {
   return (
     // Wrap the layout with ThemeProvider
-    <ThemeProvider>
-      <ThemedLayout />
-    </ThemeProvider>
+    <BeerProvider>
+      <ThemeProvider>
+        <ThemedLayout />
+      </ThemeProvider>
+    </BeerProvider>
   );
 }
