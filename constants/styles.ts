@@ -97,6 +97,7 @@ export const createThemedStyles = (isDark: boolean = true) => {
     textBase: {
       color: theme.lightForeground,
       fontSize: 16,
+      padding: 4,
     },
     textScreenTitle: {
       fontSize: 22,

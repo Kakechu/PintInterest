@@ -66,6 +66,7 @@ export default function AddBeer() {
           variant="large"
         />
         <CustomCheckbox checked={favorite} onValueChange={setFavorite} />
+        <CustomButton label="Save" />
       </View>
     </View>
   );
