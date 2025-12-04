@@ -1,5 +1,10 @@
 import { Beer, NewBeer } from "@/types/beer";
-import { addBeerApi, getBeersApi } from "@/utils/http";
+import {
+  addBeerApi,
+  deleteBeerApi,
+  editBeerApi,
+  getBeersApi,
+} from "@/utils/http";
 import {
   createContext,
   ReactNode,
@@ -14,6 +19,8 @@ interface BeerContextType {
   error: string;
   refreshBeers: () => Promise<void>;
   addBeer: (beerData: NewBeer) => Promise<void>;
+  editBeer: (editedBeer: Beer) => Promise<void>;
+  deleteBeer: (id: string) => Promise<void>;
 }
 
 const BeerContext = createContext<BeerContextType | undefined>(undefined);
@@ -45,7 +52,6 @@ export function BeerProvider({ children }: { children: ReactNode }) {
       const generatedId = response.data.name;
 
       if (generatedId) {
-        console.log("yay, success");
         const newBeer: Beer = { id: generatedId, ...beerData };
         setBeers((prev) => [...prev, newBeer]);
       } else {
@@ -57,6 +63,41 @@ export function BeerProvider({ children }: { children: ReactNode }) {
       throw err;
     }
   };
+
+  const editBeer = async (beerToEdit: Beer) => {
+    setError("");
+
+    try {
+      const response = await editBeerApi(beerToEdit);
+      if (response.status === 200) {
+        await refreshBeers();
+      } else {
+        setError("Failed to edit beer.");
+      }
+    } catch (err) {
+      setError("Failed to edit beer.");
+      console.error(err);
+      throw err;
+    }
+  };
+
+  const deleteBeer = async (id: string) => {
+    setError("");
+
+    try {
+      const response = await deleteBeerApi(id);
+      if (response.status === 200) {
+        await refreshBeers();
+      } else {
+        setError("Failed to delete beer.");
+      }
+    } catch (err) {
+      setError("Failed to delete beer.");
+      console.error(err);
+      throw err;
+    }
+  };
+
   useEffect(() => {
     refreshBeers();
   }, []);
@@ -67,6 +108,8 @@ export function BeerProvider({ children }: { children: ReactNode }) {
     error,
     refreshBeers,
     addBeer,
+    editBeer,
+    deleteBeer,
   };
 
   return <BeerContext.Provider value={value}>{children}</BeerContext.Provider>;
