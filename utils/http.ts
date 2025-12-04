@@ -1,7 +1,8 @@
 import { Beer, NewBeer } from "@/types/beer";
 import axios from "axios";
 
-const BACKEND_URL = "";
+const BACKEND_URL =
+  "https://pint-interest-kaisa-default-rtdb.europe-west1.firebasedatabase.app/";
 
 export async function getBeersApi(): Promise<Beer[]> {
   const response = await axios.get(BACKEND_URL + "beers.json");
@@ -23,5 +24,20 @@ export async function getBeersApi(): Promise<Beer[]> {
 
 export async function addBeerApi(beerData: NewBeer) {
   const response = await axios.post(BACKEND_URL + "beers.json", beerData);
+  return response;
+}
+
+export async function editBeerApi(editedBeer: Beer) {
+  const { id, ...data } = editedBeer;
+  const response = await axios({
+    method: "put",
+    url: BACKEND_URL + "beers/" + id + ".json",
+    data: data,
+  });
+  return response;
+}
+
+export async function deleteBeerApi(id: string) {
+  const response = await axios.delete(BACKEND_URL + "beers/" + id + ".json");
   return response;
 }
