@@ -82,9 +82,18 @@ export const createThemedStyles = (isDark: boolean = true) => {
       flex: 1,
       padding: 16,
     },
+    header: {
+      backgroundColor: theme.darkBackground,
+    },
     image: {
       width: 150,
       height: 150,
+      borderRadius: 18,
+      marginVertical: 12,
+    },
+    imageLarge: {
+      width: 300,
+      height: 300,
       borderRadius: 18,
       marginVertical: 12,
     },
