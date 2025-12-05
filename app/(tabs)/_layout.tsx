@@ -1,10 +1,12 @@
 import { Tabs } from "expo-router";
 
+import { useTheme } from "@/contexts/ThemeContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function TabLayout() {
+  const { styles } = useTheme();
   return (
-    <Tabs>
+    <Tabs screenOptions={{ tabBarActiveTintColor: styles.tabBarActive.color }}>
       <Tabs.Screen
         name="index"
         options={{
@@ -32,7 +34,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="beer-list"
+        name="my-beers"
         options={{
           title: "My Beers",
           headerShown: false,
@@ -42,6 +44,14 @@ export default function TabLayout() {
               size={focused ? 28 : 22}
             />
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="beer-view/[id]"
+        options={{
+          href: null,
+          title: "Beer Details",
+          headerShown: false,
         }}
       />
     </Tabs>

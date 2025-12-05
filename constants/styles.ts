@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { Colors } from "./theme";
 
 export const createThemedStyles = (isDark: boolean = true) => {
@@ -12,6 +12,17 @@ export const createThemedStyles = (isDark: boolean = true) => {
   return StyleSheet.create({
     beerIconColor: {
       color: theme.lightForeground,
+    },
+    beerItem: {
+      margin: 16,
+      backgroundColor: theme.lightBackground,
+      borderRadius: 8,
+      elevation: 4,
+      shadowColor: theme.mediumBackground,
+      shadowOpacity: 0.25,
+      shadowOffset: { width: 0, height: 2 },
+      shadowRadius: 8,
+      overflow: Platform.OS === "android" ? "hidden" : "visible",
     },
     button: {
       borderRadius: 10,
@@ -35,7 +46,6 @@ export const createThemedStyles = (isDark: boolean = true) => {
       width: 150,
       fontSize: 14,
     },
-
     buttonPressed: {
       opacity: 0.72,
     },
@@ -63,9 +73,26 @@ export const createThemedStyles = (isDark: boolean = true) => {
       marginHorizontal: 32,
       padding: 16,
     },
+    beerContainer: {
+      borderRadius: 8,
+      overflow: "hidden",
+    },
+    listContainer: {
+      flex: 1,
+      padding: 16,
+    },
+    header: {
+      backgroundColor: theme.darkBackground,
+    },
     image: {
       width: 150,
       height: 150,
+      borderRadius: 18,
+      marginVertical: 12,
+    },
+    imageLarge: {
+      width: 300,
+      height: 300,
       borderRadius: 18,
       marginVertical: 12,
     },
@@ -94,6 +121,9 @@ export const createThemedStyles = (isDark: boolean = true) => {
       flexDirection: "row",
       marginVertical: 6,
     },
+    tabBarActive: {
+      color: theme.darkBackground,
+    },
     textBase: {
       color: theme.lightForeground,
       fontSize: 16,
@@ -115,6 +145,7 @@ export const createThemedStyles = (isDark: boolean = true) => {
     textLink: {
       textDecorationLine: "underline",
     },
+    textPlaceholder: { color: theme.darkBackground },
     title: {
       color: theme.lightForeground,
       fontSize: 20,
