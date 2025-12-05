@@ -25,6 +25,11 @@ export default function BeerView() {
     );
   }
 
+  function handleEdit(beerId: string) {
+    console.log("editing", beerId);
+    router.push("/add-beer");
+  }
+
   function handleDelete(beerId: string) {
     console.log("deleting", beerId);
     deleteBeer(beerId);
@@ -41,7 +46,11 @@ export default function BeerView() {
         <BeerRating value={beer.rating} readOnly></BeerRating>
         <CustomText variant="body">{beer.description}</CustomText>
         {beer.favorite && <CustomText>This is a favorite</CustomText>}
-        <CustomButton variant="small" label="Edit" />
+        <CustomButton
+          variant="small"
+          label="Edit"
+          onPress={() => handleEdit(beer.id)}
+        />
         <CustomButton
           variant="small"
           label="Delete"
