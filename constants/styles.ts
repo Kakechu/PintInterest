@@ -57,7 +57,6 @@ export const createThemedStyles = (isDark: boolean = true) => {
       flexDirection: "row",
       marginVertical: 12,
       paddingRight: 4,
-      //alignItems: "center",
     },
     container: {
       ...basicFlex,
@@ -80,6 +79,14 @@ export const createThemedStyles = (isDark: boolean = true) => {
     listContainer: {
       flex: 1,
       padding: 16,
+    },
+    frontPageSectionContainer: {
+      margin: 16,
+      backgroundColor: theme.lightBackground,
+      borderRadius: 8,
+      overflow: Platform.OS === "android" ? "hidden" : "visible",
+      padding: 8,
+      flexDirection: "row",
     },
     header: {
       backgroundColor: theme.darkBackground,
@@ -130,9 +137,14 @@ export const createThemedStyles = (isDark: boolean = true) => {
       padding: 4,
     },
     textScreenTitle: {
-      fontSize: 22,
+      fontSize: 24,
       fontWeight: "bold",
       marginVertical: 12,
+    },
+    textTitle: {
+      fontSize: 20,
+      fontWeight: "bold",
+      marginVertical: 8,
     },
     textLabel: { fontSize: 16, marginBottom: 4 },
     textBody: { fontSize: 16 },

@@ -28,6 +28,7 @@ export default function AddBeer(editMode?: boolean) {
     undefined
   );
   const [favorite, setFavorite] = useState(false);
+  editMode = false; // This is just temporary: fixes a very very annoying bug.
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
