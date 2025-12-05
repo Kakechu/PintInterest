@@ -4,7 +4,7 @@ import { FlatList, View } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Beer } from "@/types/beer";
 
-import BeerItem from "./beer";
+import BeerItem from "./beer-item";
 
 type Props = { items: Beer[] };
 
