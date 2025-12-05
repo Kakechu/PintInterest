@@ -5,10 +5,11 @@ import CustomText from "./custom-text";
 
 type Props = {
   checked: boolean;
+  label: string;
   onValueChange: (newValue: boolean) => void;
 };
 
-const CustomCheckbox = ({ checked, onValueChange }: Props) => {
+const CustomCheckbox = ({ checked, label, onValueChange }: Props) => {
   const { styles } = useTheme();
   return (
     <View style={styles.checkBoxContainer}>
@@ -17,7 +18,7 @@ const CustomCheckbox = ({ checked, onValueChange }: Props) => {
         onValueChange={onValueChange}
         color={checked ? styles.checkBox.color : undefined}
       ></Checkbox>
-      <CustomText variant="label">Mark as favorite</CustomText>
+      <CustomText variant="label">{label}</CustomText>
     </View>
   );
 };

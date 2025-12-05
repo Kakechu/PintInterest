@@ -8,7 +8,7 @@ import { Text, View } from "react-native";
 
 const ThemedLayout = () => {
   // use theme hook here
-  const { styles, isDark } = useTheme();
+  const { isDark } = useTheme();
   // Add StatusBar below before the Stack
 
   return (

@@ -8,9 +8,17 @@ type Props = {
   value: string;
   onUpdateValue: (filledInValue: string) => void;
   long?: boolean;
+  search?: boolean;
 };
 
-const CustomInput = ({ label, secure, value, onUpdateValue, long }: Props) => {
+const CustomInput = ({
+  label,
+  secure,
+  value,
+  onUpdateValue,
+  long,
+  search,
+}: Props) => {
   const { styles } = useTheme();
 
   return (
@@ -20,6 +28,8 @@ const CustomInput = ({ label, secure, value, onUpdateValue, long }: Props) => {
         autoCapitalize="none"
         secureTextEntry={secure}
         value={value}
+        placeholder={search ? "Search" : ""}
+        placeholderTextColor={styles.textPlaceholder.color}
         onChangeText={onUpdateValue}
         style={[styles.inputBase, long && styles.inputLong]}
         multiline={long}

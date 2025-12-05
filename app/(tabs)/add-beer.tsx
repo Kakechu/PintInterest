@@ -12,12 +12,14 @@ import ImageViewer from "@/components/ui/image-viewer";
 import { NewBeer } from "@/types/beer";
 
 import { useBeers } from "@/contexts/BeerContext";
+import { useRouter } from "expo-router";
 
 const PlaceholderImage = require("@/assets/images/placeholder.png");
 
 export default function AddBeer() {
   const { styles } = useTheme();
   const { addBeer } = useBeers();
+  const router = useRouter();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -52,9 +54,19 @@ export default function AddBeer() {
       };
       console.log(beerData);
       await addBeer(beerData);
+      resetForm();
+      router.navigate("/my-beers");
     } catch (error) {
       console.log("oopsie", error);
     }
+  };
+
+  const resetForm = () => {
+    setName("");
+    setDescription("");
+    setRating(0);
+    setSelectedImage(undefined);
+    setFavorite(false);
   };
 
   return (
@@ -86,7 +98,11 @@ export default function AddBeer() {
           onPress={pickImageAsync}
           variant="large"
         />
-        <CustomCheckbox checked={favorite} onValueChange={setFavorite} />
+        <CustomCheckbox
+          checked={favorite}
+          label="Mark as favorite"
+          onValueChange={setFavorite}
+        />
         <CustomButton label="Save" onPress={onSubmitHandler} />
       </View>
     </View>

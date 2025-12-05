@@ -4,12 +4,13 @@ import CustomButton from "@/components/ui/custom_button";
 import ImageViewer from "@/components/ui/image-viewer";
 import { useBeers } from "@/contexts/BeerContext";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { View } from "react-native";
 
 export default function BeerView() {
   const { styles } = useTheme();
-  const { getBeerById } = useBeers();
+  const router = useRouter();
+  const { getBeerById, deleteBeer } = useBeers();
   const { id } = useLocalSearchParams();
   const beerId = Array.isArray(id) ? id[0] : id;
 
@@ -24,6 +25,12 @@ export default function BeerView() {
     );
   }
 
+  function handleDelete(beerId: string) {
+    console.log("deleting", beerId);
+    deleteBeer(beerId);
+    router.replace("/my-beers");
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
@@ -35,7 +42,11 @@ export default function BeerView() {
         <CustomText variant="body">{beer.description}</CustomText>
         {beer.favorite && <CustomText>This is a favorite</CustomText>}
         <CustomButton variant="small" label="Edit" />
-        <CustomButton variant="small" label="Delete" />
+        <CustomButton
+          variant="small"
+          label="Delete"
+          onPress={() => handleDelete(beer.id)}
+        />
       </View>
     </View>
   );

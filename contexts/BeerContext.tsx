@@ -18,10 +18,10 @@ interface BeerContextType {
   isLoading: boolean;
   error: string;
   refreshBeers: () => Promise<void>;
+  getBeerById: (id: string) => Beer | undefined;
   addBeer: (beerData: NewBeer) => Promise<void>;
   editBeer: (editedBeer: Beer) => Promise<void>;
   deleteBeer: (id: string) => Promise<void>;
-  getBeerById: (id: string) => Beer;
 }
 
 const BeerContext = createContext<BeerContextType | undefined>(undefined);

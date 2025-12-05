@@ -25,6 +25,7 @@ function BeerItem(beerData: Beer) {
       >
         <CustomText variant="label">{beerData.name}</CustomText>
         <BeerRating value={beerData.rating} readOnly />
+        {beerData.favorite && <CustomText variant="body">Favorite</CustomText>}
       </Pressable>
     </View>
   );

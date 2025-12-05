@@ -46,7 +46,6 @@ export const createThemedStyles = (isDark: boolean = true) => {
       width: 150,
       fontSize: 14,
     },
-
     buttonPressed: {
       opacity: 0.72,
     },
@@ -122,6 +121,9 @@ export const createThemedStyles = (isDark: boolean = true) => {
       flexDirection: "row",
       marginVertical: 6,
     },
+    tabBarActive: {
+      color: theme.darkBackground,
+    },
     textBase: {
       color: theme.lightForeground,
       fontSize: 16,
@@ -143,6 +145,7 @@ export const createThemedStyles = (isDark: boolean = true) => {
     textLink: {
       textDecorationLine: "underline",
     },
+    textPlaceholder: { color: theme.darkBackground },
     title: {
       color: theme.lightForeground,
       fontSize: 20,
