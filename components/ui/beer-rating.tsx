@@ -8,12 +8,14 @@ type RatingProps = {
   value: number;
   onChange?: (rating: number) => void;
   readOnly?: boolean;
+  label?: string;
 };
 
 const BeerRating: React.FC<RatingProps> = ({
   value = 0,
   onChange,
   readOnly = false,
+  label = "Rating",
 }: RatingProps) => {
   const { styles } = useTheme();
   const totalBeers = 5;
@@ -31,7 +33,7 @@ const BeerRating: React.FC<RatingProps> = ({
 
   return (
     <View>
-      {!readOnly && <CustomText variant={"label"}>Rating (1-5):</CustomText>}
+      {!readOnly && <CustomText variant={"label"}>{label}</CustomText>}
       <View style={styles.ratingContainer}>
         {Array.from({ length: totalBeers }, (_, index) => (
           <BeerIcon
@@ -40,12 +42,12 @@ const BeerRating: React.FC<RatingProps> = ({
             onPress={() => handlePress(index)}
           />
         ))}
+        {!readOnly && (
+          <Pressable onPress={handleClear}>
+            <CustomText variant="pressable">Reset</CustomText>
+          </Pressable>
+        )}
       </View>
-      {!readOnly && (
-        <Pressable onPress={handleClear}>
-          <CustomText variant="pressable">Reset</CustomText>
-        </Pressable>
-      )}
     </View>
   );
 };
