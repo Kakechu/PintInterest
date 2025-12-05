@@ -1,4 +1,5 @@
 import BeerList from "@/components/ui/beer-list";
+import BeerRating from "@/components/ui/beer-rating";
 import CustomCheckbox from "@/components/ui/custom-checkbox";
 import CustomText from "@/components/ui/custom-text";
 import SearchBar from "@/components/ui/search-bar";
@@ -14,8 +15,8 @@ export default function MyBeers() {
 
   const [beersToShow, setBeersToShow] = useState<Beer[]>(beers);
   const [searchText, setSearchText] = useState("");
-
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
+  const [filterRating, setFilterRating] = useState(0);
 
   useEffect(() => {
     let filtered = beers;
@@ -30,8 +31,12 @@ export default function MyBeers() {
       filtered = filtered.filter((beer) => beer.favorite);
     }
 
+    if (filterRating > 0) {
+      filtered = filtered.filter((beer) => beer.rating >= filterRating);
+    }
+
     setBeersToShow(filtered);
-  }, [beers, searchText, showOnlyFavorites]);
+  }, [beers, searchText, showOnlyFavorites, filterRating]);
 
   return (
     <View style={styles.container}>
@@ -43,7 +48,11 @@ export default function MyBeers() {
           label={"Show only favorite beers"}
           onValueChange={setShowOnlyFavorites}
         />
-        <CustomText>Show only beers with the minimum rating of...</CustomText>
+        <BeerRating
+          value={filterRating}
+          label="Filter by rating (at least)"
+          onChange={(value) => setFilterRating(value)}
+        />
       </View>
       <BeerList items={beersToShow} />
     </View>
