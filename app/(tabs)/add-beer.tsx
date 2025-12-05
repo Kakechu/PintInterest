@@ -1,7 +1,8 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import * as ImagePicker from "expo-image-picker";
-import { useState } from "react";
-import { View } from "react-native";
+import { useCallback, useMemo, useRef, useState } from "react";
+import { StyleSheet, View } from "react-native";
+
 
 import BeerRating from "@/components/ui/beer-rating";
 import CustomCheckbox from "@/components/ui/custom-checkbox";
@@ -9,6 +10,14 @@ import CustomInput from "@/components/ui/custom-input";
 import CustomText from "@/components/ui/custom-text";
 import CustomButton from "@/components/ui/custom_button";
 import ImageViewer from "@/components/ui/image-viewer";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+import BottomSheet, {
+  BottomSheetBackdrop,
+  BottomSheetView,
+  type BottomSheetBackdropProps,
+} from '@gorhom/bottom-sheet';
+
 
 const PlaceholderImage = require("@/assets/images/placeholder.png");
 
@@ -21,6 +30,27 @@ export default function AddBeer() {
     undefined
   );
   const [favorite, setFavorite] = useState(false);
+
+  const snapPoint = useMemo(() => ['40%'], []);
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+  const handleClosePress = () => bottomSheetRef.current?.close();
+  const handleOpenPress = () => bottomSheetRef.current?.expand();
+
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log('handleSheetChanges', index);
+  }, []);
+
+  const CustomBackdrop = (props: BottomSheetBackdropProps) => {
+    return (
+      <BottomSheetBackdrop
+        {...props}
+        appearsOnIndex={0}
+        //disappearsOnIndex={-1}
+        // optionally other props like opacity, enableTouchThrough, pressBehavior
+      />
+    );
+  };
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -37,7 +67,8 @@ export default function AddBeer() {
   };
 
   return (
-    <View style={styles.container}>
+    <GestureHandlerRootView>
+    <View style={styles.container} pointerEvents="box-none">
       <View style={styles.formContainer}>
         <CustomText variant={"screenTitle"}>Add a beer.</CustomText>
 
@@ -62,12 +93,52 @@ export default function AddBeer() {
 
         <CustomButton
           label="Choose a photo"
-          onPress={pickImageAsync}
+          onPress={handleOpenPress}
           variant="large"
         />
+        
         <CustomCheckbox checked={favorite} onValueChange={setFavorite} />
+        
+        <BottomSheet
+            ref={bottomSheetRef}
+            index={-1} // closed by default
+            snapPoints={snapPoint}
+            enableContentPanningGesture={false} // disable drag
+            enableHandlePanningGesture={false}  // disable handle drag
+            enablePanDownToClose={false}        // disable swipe to close
+            backgroundStyle={{ backgroundColor: 'white'}}
+            handleIndicatorStyle={{backgroundColor:"white"}}
+            onChange={handleSheetChanges}
+            backdropComponent={CustomBackdrop}>
+            <BottomSheetView style={stylesSheet.contentContainer}>
+              <CustomButton
+                label="Choose from gallery"
+                onPress={pickImageAsync}
+                variant="large"
+              />
+              <CustomButton
+                label="Take a photo"
+                onPress={handleClosePress}
+                variant="large"
+              />
+              <CustomButton
+                label="Close menu"
+                onPress={handleClosePress}
+                variant="large"
+              />
+            </BottomSheetView>
+        </BottomSheet>
         <CustomButton label="Save" />
       </View>
     </View>
+    </GestureHandlerRootView>
   );
 }
+
+const stylesSheet = StyleSheet.create({
+  contentContainer: {
+    flex: 1,
+    padding: 10,
+    alignItems: 'center',
+  },
+});
