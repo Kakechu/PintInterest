@@ -46,7 +46,6 @@ export const createThemedStyles = (isDark: boolean = true) => {
       width: 150,
       fontSize: 14,
     },
-
     buttonPressed: {
       opacity: 0.72,
     },
@@ -82,9 +81,18 @@ export const createThemedStyles = (isDark: boolean = true) => {
       flex: 1,
       padding: 16,
     },
+    header: {
+      backgroundColor: theme.darkBackground,
+    },
     image: {
       width: 150,
       height: 150,
+      borderRadius: 18,
+      marginVertical: 12,
+    },
+    imageLarge: {
+      width: 300,
+      height: 300,
       borderRadius: 18,
       marginVertical: 12,
     },
@@ -113,6 +121,9 @@ export const createThemedStyles = (isDark: boolean = true) => {
       flexDirection: "row",
       marginVertical: 6,
     },
+    tabBarActive: {
+      color: theme.darkBackground,
+    },
     textBase: {
       color: theme.lightForeground,
       fontSize: 16,
@@ -134,6 +145,7 @@ export const createThemedStyles = (isDark: boolean = true) => {
     textLink: {
       textDecorationLine: "underline",
     },
+    textPlaceholder: { color: theme.darkBackground },
     title: {
       color: theme.lightForeground,
       fontSize: 20,

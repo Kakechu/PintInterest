@@ -18,6 +18,7 @@ interface BeerContextType {
   isLoading: boolean;
   error: string;
   refreshBeers: () => Promise<void>;
+  getBeerById: (id: string) => Beer | undefined;
   addBeer: (beerData: NewBeer) => Promise<void>;
   editBeer: (editedBeer: Beer) => Promise<void>;
   deleteBeer: (id: string) => Promise<void>;
@@ -43,6 +44,10 @@ export function BeerProvider({ children }: { children: ReactNode }) {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const getBeerById = (id: string) => {
+    return beers.find((b) => b.id === id);
   };
 
   const addBeer = async (beerData: NewBeer) => {
@@ -107,6 +112,7 @@ export function BeerProvider({ children }: { children: ReactNode }) {
     isLoading,
     error,
     refreshBeers,
+    getBeerById,
     addBeer,
     editBeer,
     deleteBeer,

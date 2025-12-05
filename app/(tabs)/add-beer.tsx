@@ -1,7 +1,7 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 import BeerRating from "@/components/ui/beer-rating";
 import CustomCheckbox from "@/components/ui/custom-checkbox";
@@ -12,12 +12,14 @@ import ImageViewer from "@/components/ui/image-viewer";
 import { NewBeer } from "@/types/beer";
 
 import { useBeers } from "@/contexts/BeerContext";
+import { useRouter } from "expo-router";
 
 const PlaceholderImage = require("@/assets/images/placeholder.png");
 
-export default function AddBeer() {
+export default function AddBeer(editMode?: boolean) {
   const { styles } = useTheme();
   const { addBeer } = useBeers();
+  const router = useRouter();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -52,43 +54,77 @@ export default function AddBeer() {
       };
       console.log(beerData);
       await addBeer(beerData);
+      onFormClose();
     } catch (error) {
       console.log("oopsie", error);
     }
   };
 
+  const onEditHandler = async () => {
+    console.log("Editing beer.");
+    try {
+      console.log("Editing beer.");
+      onFormClose();
+    } catch (error) {
+      console.error("Oops", error);
+    }
+  };
+
+  const onFormClose = () => {
+    setName("");
+    setDescription("");
+    setRating(0);
+    setSelectedImage(undefined);
+    setFavorite(false);
+    router.navigate("/my-beers");
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.formContainer}>
-        <CustomText variant={"screenTitle"}>Add a beer.</CustomText>
+      <CustomText variant={"screenTitle"}>
+        {editMode ? "Edit beer." : "Add a beer."}
+      </CustomText>
+      <ScrollView>
+        <View style={styles.formContainer}>
+          <CustomInput
+            label="Name"
+            secure={false}
+            value={name}
+            onUpdateValue={(value) => setName(value)}
+          />
+          <BeerRating value={rating} onChange={(value) => setRating(value)} />
+          <CustomInput
+            label="Description"
+            secure={false}
+            value={description}
+            onUpdateValue={(value) => setDescription(value)}
+            long={true}
+          />
+          <ImageViewer
+            imgSource={PlaceholderImage}
+            selectedImage={selectedImage}
+          />
 
-        <CustomInput
-          label="Name"
-          secure={false}
-          value={name}
-          onUpdateValue={(value) => setName(value)}
-        />
-        <BeerRating value={rating} onChange={(value) => setRating(value)} />
-        <CustomInput
-          label="Description"
-          secure={false}
-          value={description}
-          onUpdateValue={(value) => setDescription(value)}
-          long={true}
-        />
-        <ImageViewer
-          imgSource={PlaceholderImage}
-          selectedImage={selectedImage}
-        />
-
-        <CustomButton
-          label="Choose a photo"
-          onPress={pickImageAsync}
-          variant="large"
-        />
-        <CustomCheckbox checked={favorite} onValueChange={setFavorite} />
-        <CustomButton label="Save" onPress={onSubmitHandler} />
-      </View>
+          <CustomButton
+            label="Choose a photo"
+            onPress={pickImageAsync}
+            variant="large"
+          />
+          <CustomCheckbox
+            checked={favorite}
+            label="Mark as favorite"
+            onValueChange={setFavorite}
+          />
+          {!editMode ? (
+            <CustomButton label="Save" onPress={onSubmitHandler} />
+          ) : (
+            <CustomButton
+              label="Save changes"
+              onPress={onEditHandler}
+            ></CustomButton>
+          )}
+        </View>
+      </ScrollView>
     </View>
   );
 }

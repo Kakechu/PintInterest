@@ -17,7 +17,7 @@ export default function Index() {
         This is where you can see the main stats:
       </CustomText>
       <CustomText variant="link">
-        <Link href="/beer-list">
+        <Link href="/my-beers">
           - You&apos;ve tried 15 beers (this could be a link that takes you to
           the listing)
         </Link>
