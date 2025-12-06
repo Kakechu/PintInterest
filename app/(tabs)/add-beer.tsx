@@ -84,7 +84,6 @@ export default function AddBeer({ editMode = false }) {
   // Edit existing beer (placeholder)
   const onEditHandler = async () => {
     try {
-      console.log("Editing beer...");
       onFormClose();
     } catch (error) {
       console.error("Edit error", error);
