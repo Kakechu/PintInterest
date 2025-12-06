@@ -21,7 +21,7 @@ const ThemedLayout = () => {
           headerRight: () => (
             <View>
               <ThemeToggle />
-              <Text>Signup/Login</Text>
+              <Text>Logout</Text>
             </View>
           ),
         }}
