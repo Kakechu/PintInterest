@@ -27,7 +27,11 @@ export default function BeerView() {
 
   function handleEdit(beerId: string) {
     console.log("editing", beerId);
-    router.push("/add-beer");
+
+    router.navigate({
+      pathname: "/edit-beer/[id]",
+      params: { id: beerId },
+    });
   }
 
   function handleDelete(beerId: string) {

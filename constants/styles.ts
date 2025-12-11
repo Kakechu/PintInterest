@@ -76,6 +76,12 @@ export const createThemedStyles = (isDark: boolean = true) => {
       borderRadius: 8,
       overflow: "hidden",
     },
+    bottomSheetContainer: {
+      flex: 1,
+      padding: 10,
+      alignItems: "center",
+      gap: 10,
+    },
     listContainer: {
       flex: 1,
       padding: 16,

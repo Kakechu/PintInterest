@@ -54,6 +54,14 @@ export default function TabLayout() {
           headerShown: false,
         }}
       />
+      <Tabs.Screen
+        name="edit-beer/[id]"
+        options={{
+          href: null,
+          title: "Edit Beer",
+          headerShown: false,
+        }}
+      />
     </Tabs>
   );
 }
