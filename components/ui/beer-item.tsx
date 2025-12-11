@@ -9,8 +9,6 @@ function BeerItem(beerData: Beer) {
   const { styles } = useTheme();
 
   function beerItemHandler() {
-    console.log("pressed");
-    console.log("id:", beerData.id, beerData.name);
     router.navigate({
       pathname: "/beer-view/[id]",
       params: { id: beerData.id },

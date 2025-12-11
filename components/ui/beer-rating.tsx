@@ -23,7 +23,6 @@ const BeerRating: React.FC<RatingProps> = ({
   const handlePress = (index: number) => {
     if (readOnly) return;
     onChange?.(index + 1);
-    console.log(index);
   };
 
   const handleClear = () => {

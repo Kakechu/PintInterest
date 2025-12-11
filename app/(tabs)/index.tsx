@@ -12,7 +12,9 @@ export default function Index() {
   const totalBeers = beers.length;
 
   const averageRating =
-    beers.reduce((total, next) => total + next.rating, 0) / beers.length;
+    totalBeers > 0
+      ? beers.reduce((total, next) => total + next.rating, 0) / beers.length
+      : 0;
 
   const favorites = beers.filter((beer) => beer.favorite).length;
 
