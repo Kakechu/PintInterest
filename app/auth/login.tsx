@@ -1,12 +1,13 @@
-import CustomText from "@/components/ui/custom-text";
+import { LoginForm } from "@/components/auth/login-form";
 import { useTheme } from "@/contexts/ThemeContext";
 import { View } from "react-native";
 
 const LoginScreen = () => {
   const { styles } = useTheme();
+
   return (
     <View style={styles.container}>
-      <CustomText variant="screenTitle">Login</CustomText>
+      <LoginForm />
     </View>
   );
 };

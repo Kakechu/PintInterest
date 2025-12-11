@@ -97,6 +97,10 @@ export const createThemedStyles = (isDark: boolean = true) => {
     header: {
       backgroundColor: theme.darkBackground,
     },
+    iconButton: {
+      color: theme.darkBackground,
+    },
+
     image: {
       width: 150,
       height: 150,

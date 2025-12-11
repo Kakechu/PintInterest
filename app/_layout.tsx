@@ -1,16 +1,17 @@
 import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { Stack } from "expo-router";
 
+import CustomIconButton from "@/components/ui/custom-icon-button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { BeerProvider } from "@/contexts/BeerContext";
+import { useAuthStore } from "@/store/authStore";
 import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 
-const isLoggedIn = true;
-const shouldCreateAccount = false;
-
 function ThemedLayout() {
-  const { isDark } = useTheme();
+  const { isDark, styles } = useTheme();
+  const { isLoggedIn, shouldCreateAccount, hasCompletedOnboarding, logOut } =
+    useAuthStore();
   return (
     <>
       <StatusBar style={isDark ? "light" : "dark"} />
@@ -23,9 +24,14 @@ function ThemedLayout() {
               headerShown: true,
               headerTitle: () => <Text>PintInterest </Text>,
               headerRight: () => (
-                <View>
+                <View style={styles.ratingContainer}>
                   <ThemeToggle />
-                  <Text>Logout</Text>
+                  <CustomIconButton
+                    icon="exit"
+                    color={styles.iconButton.color}
+                    size={24}
+                    onPress={logOut}
+                  />
                 </View>
               ),
             }}
@@ -45,6 +51,8 @@ function ThemedLayout() {
             options={{ title: "Sign Up", headerShown: false }}
           />
         </Stack.Protected>
+        {/* Visible only when onboarding has not been completed */}
+        <Stack.Protected guard={!hasCompletedOnboarding}></Stack.Protected>
       </Stack>
     </>
   );
