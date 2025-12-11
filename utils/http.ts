@@ -1,8 +1,7 @@
 import { Beer, NewBeer } from "@/types/beer";
 import axios from "axios";
 
-const BACKEND_URL =
-  "https://pint-interest-kaisa-default-rtdb.europe-west1.firebasedatabase.app/";
+const BACKEND_URL = process.env.EXPO_PUBLIC_DATABASE_URL;
 
 export async function getBeersApi(): Promise<Beer[]> {
   const response = await axios.get(BACKEND_URL + "beers.json");
