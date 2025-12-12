@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/store/authStore";
 import { Beer, NewBeer } from "@/types/beer";
 import {
   addBeerApi,
@@ -31,7 +32,12 @@ export function BeerProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const { isLoggedIn, userId, idToken } = useAuthStore();
+
   const refreshBeers = async () => {
+    if (!isLoggedIn || !userId || !idToken) {
+      return;
+    }
     setIsLoading(true);
     setError("");
 

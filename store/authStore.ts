@@ -49,6 +49,8 @@ export const useAuthStore = create(
             ...state,
             isLoggedIn: false,
             shouldCreateAccount: false,
+            idToken: null,
+            userId: null,
           };
         });
       },
