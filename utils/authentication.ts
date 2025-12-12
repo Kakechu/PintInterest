@@ -4,8 +4,6 @@ const API_KEY = process.env.EXPO_PUBLIC_API_KEY!;
 const handleFirebaseError = (error: any): never => {
   if (isAxiosError(error) && error.response) {
     const errorCode = error.response.data.error?.message;
-    console.log("error", error);
-    console.log("error code: ", errorCode);
 
     switch (errorCode) {
       case "EMAIL_EXISTS":
@@ -41,7 +39,6 @@ export const signUpService = async ({
   email,
   password,
 }: Props): Promise<AuthResponse> => {
-  console.log("signing up: ", email, password);
   try {
     const response = await axios.post<AuthResponse>(
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" +
@@ -62,7 +59,6 @@ export const loginService = async ({
   email,
   password,
 }: Props): Promise<AuthResponse> => {
-  console.log("logging in: ", email, password);
   try {
     const response = await axios.post<AuthResponse>(
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
