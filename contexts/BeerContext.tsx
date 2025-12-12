@@ -37,6 +37,7 @@ export function BeerProvider({ children }: { children: ReactNode }) {
 
     try {
       const fetchedBeers = await getBeersApi();
+
       setBeers(fetchedBeers);
     } catch (err) {
       setError("Failed to fetch beers.");
