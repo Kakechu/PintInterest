@@ -1,6 +1,7 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable } from "react-native";
 
 interface CustomIconButtonProps {
   icon: React.ComponentProps<typeof Ionicons>["name"];
@@ -15,9 +16,14 @@ const CustomIconButton = ({
   size,
   onPress,
 }: CustomIconButtonProps) => {
+  const { styles } = useTheme();
+
   return (
     <Pressable
-      style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+      style={({ pressed }) => [
+        styles.iconButton,
+        pressed && styles.buttonPressed,
+      ]}
       onPress={onPress}
     >
       <Ionicons name={icon} color={color} size={size} />
@@ -26,13 +32,3 @@ const CustomIconButton = ({
 };
 
 export default CustomIconButton;
-
-const styles = StyleSheet.create({
-  button: {
-    margin: 8,
-    borderRadius: 18,
-  },
-  pressed: {
-    opacity: 0.72,
-  },
-});

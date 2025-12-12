@@ -97,6 +97,13 @@ export const createThemedStyles = (isDark: boolean = true) => {
     buttonPressed: {
       opacity: 0.72,
     },
+    iconButton: {
+      margin: 8,
+      borderRadius: 18,
+      alignItems: "center",
+      justifyContent: "center",
+      color: "black",
+    },
   });
 
   // Text styles
@@ -199,9 +206,6 @@ export const createThemedStyles = (isDark: boolean = true) => {
     },
     header: {
       backgroundColor: theme.darkBackground,
-    },
-    iconButton: {
-      color: theme.darkBackground,
     },
   });
 
