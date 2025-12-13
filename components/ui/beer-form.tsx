@@ -73,6 +73,34 @@ export default function BeerForm({
     }
   };
 
+  const takePhotoAsync = async () => {
+    const hasPermission = await requestCameraPermission();
+    if (!hasPermission) return;
+  
+    const result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      quality: 1,
+    });
+  
+    if (!result.canceled) {
+      const uri = result.assets[0].uri;
+      setSelectedImage(uri);
+      closeSheet();
+    }
+  };  
+
+
+  //Camera Permission
+  const requestCameraPermission = async () => {
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    if (status !== "granted") {
+      alert("Camera permission is required to take a photo.");
+      return false;
+    }
+    return true;
+  };  
+
+
   useEffect(() => {
     if (initialValues) {
       setName(initialValues.name ?? "");
@@ -169,7 +197,7 @@ export default function BeerForm({
             />
             <CustomButton
               label="Take a photo"
-              onPress={closeSheet}
+              onPress={takePhotoAsync}
               variant="large"
             />
             <CustomButton
