@@ -2,10 +2,11 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useAuthStore } from "@/store/authStore";
 import { signUpService } from "@/utils/authentication";
 import { useState } from "react";
-import { Alert, View } from "react-native";
+import { Alert } from "react-native";
 import CustomInput from "../ui/custom-input";
 import CustomText from "../ui/custom-text";
 import CustomButton from "../ui/custom_button";
+import FormContainer from "../ui/form-container";
 
 export const SignUpForm = () => {
   const { styles } = useTheme();
@@ -39,7 +40,7 @@ export const SignUpForm = () => {
   };
 
   return (
-    <View style={styles.formContainer}>
+    <FormContainer style={styles.formContainer}>
       <CustomText variant="screenTitle">Sign up!</CustomText>
       <CustomInput
         label="Email"
@@ -60,6 +61,6 @@ export const SignUpForm = () => {
         onUpdateValue={setConfirmPassword}
       />
       <CustomButton label="Sign up" onPress={onSignUp} />
-    </View>
+    </FormContainer>
   );
 };

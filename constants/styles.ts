@@ -1,6 +1,19 @@
 import { Platform, StyleSheet } from "react-native";
 import { Colors } from "./theme";
 
+export const createShadow = (elevation: number = 4, color: string = "#000") => {
+  if (Platform.OS === "android") {
+    return { elevation };
+  } else {
+    return {
+      shadowColor: color,
+      shadowOffset: { width: 0, height: elevation / 2 },
+      shadowOpacity: 0.25,
+      shadowRadius: elevation,
+    };
+  }
+};
+
 export const createThemedStyles = (isDark: boolean = true) => {
   const theme = isDark ? Colors.dark : Colors.light;
 
@@ -9,21 +22,56 @@ export const createThemedStyles = (isDark: boolean = true) => {
     flexWrap: "nowrap",
   } as const;
 
-  return StyleSheet.create({
-    beerIconColor: {
-      color: theme.lightForeground,
+  // Containers
+  const containers = StyleSheet.create({
+    container: {
+      ...basicFlex,
+      flex: 1,
+      justifyContent: "center",
+      paddingHorizontal: 25,
+      backgroundColor: theme.darkBackground,
     },
+    formContainer: {
+      ...basicFlex,
+      backgroundColor: theme.darkBackground,
+      marginTop: 64,
+      marginHorizontal: 32,
+      padding: 16,
+    },
+    listContainer: {
+      flex: 1,
+      padding: 16,
+    },
+    bottomSheetContainer: {
+      flex: 1,
+      padding: 10,
+      alignItems: "center",
+      gap: 10,
+    },
+  });
+
+  // Card styles
+  const cards = StyleSheet.create({
     beerItem: {
       margin: 16,
       backgroundColor: theme.lightBackground,
       borderRadius: 8,
-      elevation: 4,
-      shadowColor: theme.mediumBackground,
-      shadowOpacity: 0.25,
-      shadowOffset: { width: 0, height: 2 },
-      shadowRadius: 8,
+      ...createShadow(4, theme.mediumBackground),
       overflow: Platform.OS === "android" ? "hidden" : "visible",
     },
+    frontPageSectionContainer: {
+      margin: 16,
+      backgroundColor: theme.lightBackground,
+      borderRadius: 8,
+      ...createShadow(3, theme.mediumBackground),
+      overflow: Platform.OS === "android" ? "hidden" : "visible",
+      padding: 8,
+      flexDirection: "row",
+    },
+  });
+
+  // Button styles
+  const buttons = StyleSheet.create({
     button: {
       borderRadius: 10,
       alignItems: "center",
@@ -49,98 +97,17 @@ export const createThemedStyles = (isDark: boolean = true) => {
     buttonPressed: {
       opacity: 0.72,
     },
-    checkBox: {
-      color: theme.lightForeground,
-      marginRight: 4,
-    },
-    checkBoxContainer: {
-      flexDirection: "row",
-      marginVertical: 12,
-      paddingRight: 4,
-    },
-    container: {
-      ...basicFlex,
-      flex: 1,
-      justifyContent: "center",
-      paddingHorizontal: 25,
-      backgroundColor: theme.darkBackground,
-    },
-    formContainer: {
-      ...basicFlex,
-      backgroundColor: theme.darkBackground,
-      marginTop: 64,
-      marginHorizontal: 32,
-      padding: 16,
-    },
-    beerContainer: {
-      borderRadius: 8,
-      overflow: "hidden",
-    },
-    bottomSheetContainer: {
-      flex: 1,
-      padding: 10,
-      alignItems: "center",
-      gap: 10,
-    },
-    listContainer: {
-      flex: 1,
-      padding: 16,
-    },
-    frontPageSectionContainer: {
-      margin: 16,
-      backgroundColor: theme.lightBackground,
-      borderRadius: 8,
-      overflow: Platform.OS === "android" ? "hidden" : "visible",
-      padding: 8,
-      flexDirection: "row",
-    },
-    header: {
-      backgroundColor: theme.darkBackground,
-    },
     iconButton: {
-      color: theme.darkBackground,
+      margin: 8,
+      borderRadius: 18,
+      alignItems: "center",
+      justifyContent: "center",
+      color: "black",
     },
+  });
 
-    image: {
-      width: 150,
-      height: 150,
-      borderRadius: 18,
-      marginVertical: 12,
-    },
-    imageLarge: {
-      width: 300,
-      height: 300,
-      borderRadius: 18,
-      marginVertical: 12,
-    },
-    inputBase: {
-      backgroundColor: theme.lightBackground,
-      color: theme.lightForeground,
-      paddingHorizontal: 6,
-      paddingVertical: 10,
-      fontSize: 18,
-      borderRadius: 6,
-      textAlignVertical: "top",
-    },
-    inputLong: {
-      minHeight: 90,
-      maxHeight: 200,
-    },
-    inputContainer: {
-      ...basicFlex,
-      marginVertical: 6,
-    },
-    label: {
-      color: theme.lightForeground,
-      marginBottom: 6,
-    },
-    ratingContainer: {
-      flexDirection: "row",
-      marginVertical: 6,
-    },
-    tabBarActive: {
-      color: theme.darkBackground,
-    },
+  // Text styles
+  const text = StyleSheet.create({
     textBase: {
       color: theme.lightForeground,
       fontSize: 16,
@@ -168,10 +135,87 @@ export const createThemedStyles = (isDark: boolean = true) => {
       textDecorationLine: "underline",
     },
     textPlaceholder: { color: theme.darkBackground },
-    title: {
+  });
+
+  // Input styles
+  const inputs = StyleSheet.create({
+    inputBase: {
+      backgroundColor: theme.lightBackground,
       color: theme.lightForeground,
-      fontSize: 20,
-      fontWeight: "bold",
+      paddingHorizontal: 6,
+      paddingVertical: 10,
+      fontSize: 18,
+      borderRadius: 6,
+      textAlignVertical: "top",
+    },
+    inputLong: {
+      minHeight: 90,
+      maxHeight: 200,
+    },
+    inputContainer: {
+      ...basicFlex,
+      marginVertical: 6,
+    },
+    label: {
+      color: theme.lightForeground,
+      marginBottom: 6,
     },
   });
+
+  // Image/media styles
+  const images = StyleSheet.create({
+    image: {
+      width: 150,
+      height: 150,
+      borderRadius: 18,
+      marginVertical: 12,
+    },
+    imageLarge: {
+      width: 300,
+      height: 300,
+      borderRadius: 18,
+      marginVertical: 12,
+    },
+    imageWrapper: {
+      borderRadius: 18,
+      ...createShadow(5, theme.mediumBackground),
+      overflow: "hidden",
+    },
+  });
+
+  // Other UI styles
+  const ui = StyleSheet.create({
+    checkBox: {
+      color: theme.lightForeground,
+      marginRight: 4,
+    },
+    checkBoxContainer: {
+      flexDirection: "row",
+      marginVertical: 12,
+      paddingRight: 4,
+    },
+    ratingContainer: {
+      flexDirection: "row",
+      marginVertical: 6,
+    },
+    beerIconColor: {
+      color: theme.lightForeground,
+    },
+    tabBarActive: {
+      color: theme.darkBackground,
+    },
+    header: {
+      backgroundColor: theme.darkBackground,
+    },
+  });
+
+  return {
+    ...containers,
+    ...cards,
+    ...buttons,
+    ...text,
+    ...inputs,
+    ...images,
+    ...ui,
+  };
 };

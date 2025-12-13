@@ -24,10 +24,8 @@ export default function EditBeer() {
   }
 
   const handleSaveChanges = async (beerId: string, beerToSave: NewBeer) => {
-    console.log("editing", beerId);
-    console.log("beer to save", beerToSave);
     const beerData = { id: beerId, ...beerToSave };
-    console.log(beerData);
+
     await editBeer(beerData);
     router.replace("/(tabs)/my-beers");
   };

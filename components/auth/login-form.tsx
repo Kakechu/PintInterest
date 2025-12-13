@@ -2,10 +2,11 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useAuthStore } from "@/store/authStore";
 import { loginService } from "@/utils/authentication";
 import { useState } from "react";
-import { Alert, View } from "react-native";
+import { Alert } from "react-native";
 import CustomInput from "../ui/custom-input";
 import CustomText from "../ui/custom-text";
 import CustomButton from "../ui/custom_button";
+import FormContainer from "../ui/form-container";
 
 export const LoginForm = () => {
   const { styles } = useTheme();
@@ -26,7 +27,7 @@ export const LoginForm = () => {
     }
   };
   return (
-    <View style={styles.formContainer}>
+    <FormContainer style={styles.formContainer}>
       <CustomText variant="screenTitle">Log in!</CustomText>
       <CustomInput
         label="Email"
@@ -41,6 +42,6 @@ export const LoginForm = () => {
         onUpdateValue={setPassword}
       />
       <CustomButton label="Log in" onPress={handleLogin} />
-    </View>
+    </FormContainer>
   );
 };
