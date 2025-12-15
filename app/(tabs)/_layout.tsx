@@ -47,6 +47,19 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={focused ? "settings" : "settings-outline"}
+              size={focused ? 28 : 22}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="beer-view/[id]"
         options={{
           href: null,

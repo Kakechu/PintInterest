@@ -33,7 +33,7 @@ const BeerRating: React.FC<RatingProps> = ({
   return (
     <View>
       {!readOnly && <CustomText variant={"label"}>{label}</CustomText>}
-      <View style={styles.ratingContainer}>
+      <View style={styles.rowContainer}>
         {Array.from({ length: totalBeers }, (_, index) => (
           <BeerIcon
             key={index}

@@ -16,7 +16,11 @@ export const ThemeToggle = () => {
       ]}
       onPress={onPress}
     >
-      <Ionicons name={isDark ? "sunny" : "moon"} size={22} />
+      <Ionicons
+        name={isDark ? "sunny" : "moon"}
+        size={22}
+        color={styles.buttonLabel.color}
+      />
     </Pressable>
   );
 };

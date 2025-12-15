@@ -83,8 +83,22 @@ export const createThemedStyles = (isDark: boolean = true) => {
       padding: 4,
       marginVertical: 6,
     },
+    secondaryButton: {
+      borderRadius: 10,
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "row",
+      backgroundColor: theme.lightForeground,
+      borderWidth: 4,
+      borderColor: theme.lightBackground,
+      padding: 4,
+      marginVertical: 6,
+    },
     buttonLabel: {
       color: theme.lightForeground,
+    },
+    buttonLabelSecondary: {
+      color: theme.lightBackground,
     },
     buttonLarge: {
       width: 225,
@@ -97,12 +111,13 @@ export const createThemedStyles = (isDark: boolean = true) => {
     buttonPressed: {
       opacity: 0.72,
     },
+
     iconButton: {
       margin: 8,
       borderRadius: 18,
       alignItems: "center",
       justifyContent: "center",
-      color: "black",
+      color: theme.lightForeground,
     },
   });
 
@@ -194,7 +209,7 @@ export const createThemedStyles = (isDark: boolean = true) => {
       marginVertical: 12,
       paddingRight: 4,
     },
-    ratingContainer: {
+    rowContainer: {
       flexDirection: "row",
       marginVertical: 6,
     },
