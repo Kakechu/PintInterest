@@ -42,6 +42,7 @@ export const LoginForm = () => {
         value={password}
         onUpdateValue={setPassword}
       />
+
       <CustomButton label="Log in" onPress={handleLogin} />
     </FormContainer>
   );

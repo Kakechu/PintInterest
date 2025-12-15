@@ -162,6 +162,7 @@ export const createThemedStyles = (isDark: boolean = true) => {
       fontSize: 18,
       borderRadius: 6,
       textAlignVertical: "top",
+      flex: 1,
     },
     inputLong: {
       minHeight: 90,
@@ -174,6 +175,19 @@ export const createThemedStyles = (isDark: boolean = true) => {
     label: {
       color: theme.lightForeground,
       marginBottom: 6,
+    },
+    inputWrapper: {
+      position: "relative",
+    },
+    inputWithIcon: {
+      paddingRight: 44,
+    },
+    iconOverlay: {
+      position: "absolute",
+      right: 8,
+      top: 0,
+      bottom: 0,
+      justifyContent: "center",
     },
   });
 
