@@ -1,7 +1,6 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuthStore } from "@/store/authStore";
 import { loginService } from "@/utils/authentication";
-import { router } from "expo-router";
 import { useState } from "react";
 import { Alert } from "react-native";
 import CustomInput from "../ui/custom-input";
@@ -26,10 +25,6 @@ export const LoginForm = () => {
     } catch (error: any) {
       Alert.alert("Sign up failed:", error.message ?? "unknown error");
     }
-  };
-
-  const handleSignUpNavigation = () => {
-    router.navigate("/auth/signup");
   };
 
   return (
