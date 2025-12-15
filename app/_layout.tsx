@@ -2,7 +2,6 @@ import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { Stack } from "expo-router";
 
 import CustomIconButton from "@/components/ui/custom-icon-button";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { BeerProvider } from "@/contexts/BeerContext";
 import { useAuthStore } from "@/store/authStore";
 import { StatusBar } from "expo-status-bar";
@@ -16,7 +15,7 @@ function ThemedLayout() {
     <>
       <StatusBar style={isDark ? "light" : "dark"} />
       <Stack>
-        {/* Visible only when logged in */}
+        {/* Logged in users */}
         <Stack.Protected guard={isLoggedIn}>
           <Stack.Screen
             name="(tabs)"
@@ -24,11 +23,10 @@ function ThemedLayout() {
               headerShown: true,
               headerTitle: () => <Text>PintInterest </Text>,
               headerRight: () => (
-                <View style={styles.ratingContainer}>
-                  <ThemeToggle />
+                <View style={styles.rowContainer}>
                   <CustomIconButton
                     icon="exit"
-                    color={styles.iconButton.color}
+                    color="black"
                     size={24}
                     onPress={logOut}
                   />
@@ -37,7 +35,7 @@ function ThemedLayout() {
             }}
           />
         </Stack.Protected>
-        {/* Visible only when not logged in and account has been created */}
+        {/* Not logged in */}
         <Stack.Protected guard={!isLoggedIn && !shouldCreateAccount}>
           <Stack.Screen
             name={"auth/login"}

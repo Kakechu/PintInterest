@@ -10,7 +10,7 @@ import FormContainer from "../ui/form-container";
 
 export const SignUpForm = () => {
   const { styles } = useTheme();
-  const { createAccount } = useAuthStore();
+  const { createAccount, completeOnboarding } = useAuthStore();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,6 +39,12 @@ export const SignUpForm = () => {
     }
   };
 
+  const goToLogin = () => {
+    createAccount();
+    completeOnboarding();
+    return;
+  };
+
   return (
     <FormContainer style={styles.formContainer}>
       <CustomText variant="screenTitle">Sign up!</CustomText>
@@ -61,6 +67,8 @@ export const SignUpForm = () => {
         onUpdateValue={setConfirmPassword}
       />
       <CustomButton label="Sign up" onPress={onSignUp} />
+      <CustomText>Already have an account?</CustomText>
+      <CustomButton label="Login here" secondary onPress={goToLogin} />
     </FormContainer>
   );
 };

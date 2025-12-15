@@ -13,6 +13,7 @@ type UserState = {
   createAccount: () => void;
   logIn: (token: string, userId: string) => void;
   logOut: () => void;
+  deleteUser: () => void; //DEMO ONLY: resets app state
   completeOnboarding: () => void;
   resetOnboarding: () => void;
 };
@@ -52,6 +53,19 @@ export const useAuthStore = create(
             idToken: null,
             userId: null,
           };
+        });
+      },
+      /* DEMO ONLY */
+      deleteUser: async () => {
+        // Remove persisted auth data
+        await deleteItemAsync("auth-store");
+        // Reset store
+        set({
+          isLoggedIn: false,
+          shouldCreateAccount: true,
+          hasCompletedOnboarding: false,
+          idToken: null,
+          userId: null,
         });
       },
       completeOnboarding: () => {
