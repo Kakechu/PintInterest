@@ -3,7 +3,7 @@ import { useBeers } from "@/contexts/BeerContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Link } from "expo-router";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 
 export default function Index() {
   const { styles } = useTheme();
@@ -27,6 +27,18 @@ export default function Index() {
           <Link href="/add-beer">Add a beer</Link>
         </CustomText>
       </View>
+      <Pressable>
+        <View style={styles.frontPageSectionContainer}>
+          <Ionicons
+            name={"beer"}
+            size={28}
+            color={styles.beerIconColor.color}
+          />
+          <CustomText variant="body">
+            <Link href="/add-beer">Add a beer</Link>
+          </CustomText>
+        </View>
+      </Pressable>
       <View style={styles.frontPageSectionContainer}>
         <Ionicons name="list" size={28} color={styles.beerIconColor.color} />
         <CustomText variant="body">
