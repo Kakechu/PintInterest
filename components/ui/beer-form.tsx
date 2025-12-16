@@ -135,7 +135,7 @@ export default function BeerForm({
         <ScrollView>
           <View style={styles.formContainer}>
             <CustomText variant={"screenTitle"}>
-              {initialValues ? "Edit beer." : "Add a beer."}
+              {initialValues ? "Edit beer" : "Add a beer"}
             </CustomText>
 
             <CustomInput

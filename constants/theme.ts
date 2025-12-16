@@ -1,4 +1,5 @@
 /*
+
 export const Colors = {
   light: {
     lightBackground: "#fff7e6", // vaalea olutkulta
@@ -14,7 +15,6 @@ export const Colors = {
   },
 };
 */
-
 /*
 export const Colors = {
   light: {
@@ -32,6 +32,7 @@ export const Colors = {
 };
 */
 
+// Medium dark
 export const Colors = {
   light: {
     lightBackground: "#fff8e6", // vaalea tausta, lämmin olutkulta
@@ -46,19 +47,3 @@ export const Colors = {
     lightForeground: "#ffe5a0", // lämmin keltainen, helppo luettavuus
   },
 };
-/*
-export const Colors = {
-  light: {
-    lightBackground: "#f0f4ff",
-    mediumBackground: "#e1ecff",
-    darkBackground: "#ffffff",
-    lightForeground: "#003b73",
-  },
-  dark: {
-    lightBackground: "#60a3d9",
-    mediumBackground: "#0074b7",
-    darkBackground: "#003b73",
-    lightForeground: "white",
-  },
-};
-*/

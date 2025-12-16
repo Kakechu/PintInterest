@@ -3,7 +3,7 @@ import { useBeers } from "@/contexts/BeerContext";
 import { NewBeer } from "@/types/beer";
 import { useRouter } from "expo-router";
 
-export default function AddBeer({ editMode = false }) {
+export default function AddBeer() {
   const { addBeer } = useBeers();
   const router = useRouter();
 
