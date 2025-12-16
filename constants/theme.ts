@@ -1,4 +1,5 @@
 /*
+
 export const Colors = {
   light: {
     lightBackground: "#fff7e6", // vaalea olutkulta
@@ -14,7 +15,7 @@ export const Colors = {
   },
 };
 */
-
+/*
 export const Colors = {
   light: {
     lightBackground: "#fff8e6", // vaalea tausta, lämmin olutkulta
@@ -29,20 +30,20 @@ export const Colors = {
     lightForeground: "#fff3cc", // vaalea keltainen teksti, hyvä kontrasti
   },
 };
+*/
 
-/*
+// Medium dark
 export const Colors = {
   light: {
-    lightBackground: "#f0f4ff",
-    mediumBackground: "#e1ecff",
-    darkBackground: "#ffffff",
-    lightForeground: "#003b73",
+    lightBackground: "#fff8e6", // vaalea tausta, lämmin olutkulta
+    mediumBackground: "#ffebcc", // hieman tummempi beige
+    darkBackground: "#ffd480", // kirkas keltainen, korostuksiin
+    lightForeground: "#3d1a00", // tumma suklaanruskea, selkeä kontrasti
   },
   dark: {
-    lightBackground: "#60a3d9",
-    mediumBackground: "#0074b7",
-    darkBackground: "#003b73",
-    lightForeground: "white",
+    lightBackground: "#2a1500", // erittäin tumma ruskea, lähes musta
+    mediumBackground: "#3e2200", // tumma suklaanruskea, tabit ja kortit
+    darkBackground: "#5a3300", // tumma pronssi/olutväri, painikkeet/accent
+    lightForeground: "#ffe5a0", // lämmin keltainen, helppo luettavuus
   },
 };
-*/

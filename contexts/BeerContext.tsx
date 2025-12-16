@@ -111,12 +111,12 @@ export function BeerProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    if (!isLoggedIn || !userId || !idToken) {
+    if (isLoggedIn && idToken) {
+      refreshBeers();
+    } else {
       setBeers([]);
-      return;
     }
-    refreshBeers();
-  }, [isLoggedIn, userId, idToken]);
+  }, [isLoggedIn, idToken]);
 
   const value = {
     beers,

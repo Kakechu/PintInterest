@@ -138,6 +138,13 @@ export const createThemedStyles = (isDark: boolean = true) => {
       fontWeight: "bold",
       marginVertical: 8,
     },
+    textHeader: {
+      fontSize: 20,
+      fontWeight: "bold",
+      marginVertical: 8,
+      color: "black",
+      justifyContent: "center",
+    },
     textLabel: { fontSize: 16, marginBottom: 4 },
     textBody: { fontSize: 16 },
     textPressable: {
@@ -237,7 +244,7 @@ export const createThemedStyles = (isDark: boolean = true) => {
       color: theme.darkBackground,
     },
     header: {
-      backgroundColor: theme.darkBackground,
+      backgroundColor: theme.lightForeground,
     },
   });
 
