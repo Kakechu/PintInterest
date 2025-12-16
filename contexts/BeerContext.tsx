@@ -112,7 +112,6 @@ export function BeerProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!isLoggedIn || !userId || !idToken) {
-      // käyttäjä kirjautui ulos tai ei ole valmis → tyhjennä state
       setBeers([]);
       return;
     }
