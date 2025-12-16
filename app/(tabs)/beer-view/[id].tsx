@@ -5,7 +5,7 @@ import ImageViewer from "@/components/ui/image-viewer";
 import { useBeers } from "@/contexts/BeerContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 
 export default function BeerView() {
   const { styles } = useTheme();
@@ -26,18 +26,39 @@ export default function BeerView() {
   }
 
   function handleEdit(beerId: string) {
-    console.log("editing", beerId);
-
     router.navigate({
       pathname: "/edit-beer/[id]",
       params: { id: beerId },
     });
   }
 
-  function handleDelete(beerId: string) {
-    console.log("deleting", beerId);
-    deleteBeer(beerId);
-    router.replace("/my-beers");
+  async function handleDelete(beerId: string) {
+    try {
+      await deleteBeer(beerId);
+      router.replace("/my-beers");
+    } catch (error) {
+      Alert.alert("Failed to delete beer");
+      console.error(error);
+    }
+  }
+
+  function confirmDelete(beerId: string) {
+    Alert.alert(
+      "Confirm deletion",
+      "Are you sure you want to delete this beer?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+          onPress: () => console.log("Canceling deletion"),
+        },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => handleDelete(beerId),
+        },
+      ]
+    );
   }
 
   return (
@@ -58,7 +79,7 @@ export default function BeerView() {
         <CustomButton
           variant="small"
           label="Delete"
-          onPress={() => handleDelete(beer.id)}
+          onPress={() => confirmDelete(beer.id)}
         />
       </View>
     </View>
