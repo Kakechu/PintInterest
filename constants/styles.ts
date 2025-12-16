@@ -163,6 +163,7 @@ export const createThemedStyles = (isDark: boolean = true) => {
       borderRadius: 6,
       textAlignVertical: "top",
       flex: 1,
+      minHeight: 48,
     },
     inputLong: {
       minHeight: 90,
@@ -178,6 +179,8 @@ export const createThemedStyles = (isDark: boolean = true) => {
     },
     inputWrapper: {
       position: "relative",
+      minHeight: 48,
+      justifyContent: "center",
     },
     inputWithIcon: {
       paddingRight: 44,

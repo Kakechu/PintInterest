@@ -4,7 +4,7 @@ import { useBeers } from "@/contexts/BeerContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { NewBeer } from "@/types/beer";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 
 export default function EditBeer() {
   const { styles } = useTheme();
@@ -24,10 +24,15 @@ export default function EditBeer() {
   }
 
   const handleSaveChanges = async (beerId: string, beerToSave: NewBeer) => {
-    const beerData = { id: beerId, ...beerToSave };
+    try {
+      const beerData = { id: beerId, ...beerToSave };
 
-    await editBeer(beerData);
-    router.replace("/(tabs)/my-beers");
+      await editBeer(beerData);
+      router.replace("/(tabs)/my-beers");
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Failed to save changes");
+    }
   };
 
   return (
