@@ -1,11 +1,10 @@
 import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { Stack } from "expo-router";
 
-import CustomIconButton from "@/components/ui/custom-icon-button";
+import CustomText from "@/components/ui/custom-text";
 import { BeerProvider } from "@/contexts/BeerContext";
 import { useAuthStore } from "@/store/authStore";
 import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
 
 function ThemedLayout() {
   const { isDark, styles } = useTheme();
@@ -16,21 +15,14 @@ function ThemedLayout() {
       <StatusBar style={isDark ? "light" : "dark"} />
       <Stack>
         {/* Logged in users */}
-        <Stack.Protected guard={isLoggedIn}>
+        <Stack.Protected guard={isLoggedIn && !shouldCreateAccount}>
           <Stack.Screen
             name="(tabs)"
             options={{
               headerShown: true,
-              headerTitle: () => <Text>PintInterest </Text>,
-              headerRight: () => (
-                <View style={styles.rowContainer}>
-                  <CustomIconButton
-                    icon="exit"
-                    color="black"
-                    size={24}
-                    onPress={logOut}
-                  />
-                </View>
+              headerTitleAlign: "center",
+              headerTitle: () => (
+                <CustomText variant="headerText">PintInterest 🍺</CustomText>
               ),
             }}
           />

@@ -4,6 +4,7 @@ import { Text, View } from "react-native";
 type TextVariant =
   | "screenTitle"
   | "title"
+  | "headerText"
   | "label"
   | "body"
   | "pressable"
@@ -23,6 +24,7 @@ const CustomText = ({ children, variant }: Props) => {
           styles.textBase,
           variant === "screenTitle" && styles.textScreenTitle,
           variant === "title" && styles.textTitle,
+          variant === "headerText" && styles.textHeader,
           variant === "label" && styles.textLabel,
           variant === "body" && styles.textBody,
           variant === "pressable" && styles.textPressable,

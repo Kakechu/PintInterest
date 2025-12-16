@@ -1,7 +1,7 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import * as ImagePicker from "expo-image-picker";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { Pressable, ScrollView, View } from "react-native";
 
 import BeerRating from "@/components/ui/beer-rating";
 import CustomCheckbox from "@/components/ui/custom-checkbox";
@@ -76,19 +76,18 @@ export default function BeerForm({
   const takePhotoAsync = async () => {
     const hasPermission = await requestCameraPermission();
     if (!hasPermission) return;
-  
+
     const result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
       quality: 1,
     });
-  
+
     if (!result.canceled) {
       const uri = result.assets[0].uri;
       setSelectedImage(uri);
       closeSheet();
     }
-  };  
-
+  };
 
   //Camera Permission
   const requestCameraPermission = async () => {
@@ -98,8 +97,7 @@ export default function BeerForm({
       return false;
     }
     return true;
-  };  
-
+  };
 
   useEffect(() => {
     if (initialValues) {
@@ -156,16 +154,20 @@ export default function BeerForm({
               onUpdateValue={setDescription}
               long={true}
             />
-
-            <ImageViewer
-              imgSource={PlaceholderImage}
-              selectedImage={selectedImage}
-            />
-
+            <Pressable
+              onPress={openSheet}
+              accessible
+              accessibilityLabel="Select or change beer image"
+            >
+              <ImageViewer
+                imgSource={PlaceholderImage}
+                selectedImage={selectedImage}
+              />
+            </Pressable>
             <CustomButton
               label="Choose a photo"
               onPress={openSheet}
-              variant="large"
+              variant="small"
             />
 
             <CustomCheckbox
@@ -185,7 +187,9 @@ export default function BeerForm({
           enableContentPanningGesture={false}
           enableHandlePanningGesture={false}
           enablePanDownToClose={false}
-          backgroundStyle={{ backgroundColor: "white" }}
+          backgroundStyle={{
+            backgroundColor: "white",
+          }}
           handleIndicatorStyle={{ backgroundColor: "white" }}
           backdropComponent={CustomBackdrop}
         >
